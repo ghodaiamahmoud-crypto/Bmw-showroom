@@ -96,7 +96,7 @@ View Cars
 
 <h2>Book Test Drive</h2>
 
-<form action="book.php" method="post">
+<form id="bookingForm">
 
 <input type="text" name="name" placeholder="Your Name" required>
 <input type="text" name="phone" placeholder="Phone Number" required>
@@ -183,21 +183,33 @@ document.getElementById("loader").style.display="none";
  
 function showPopup(){
 document.getElementById("popup").style.display="flex";
-
-setTimeout(()=>{
-window.location.href="index.html";
-},3000);
 }
 
 function closePopup(){
 document.getElementById("popup").style.display="none";
+document.getElementById("bookingForm").reset();
 }
- 
-const params = new URLSearchParams(window.location.search);
 
-if(params.get("success") == "1"){
-showPopup();
-}
+document.getElementById("bookingForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const name = this.querySelector('input[name="name"]').value;
+    const phone = this.querySelector('input[name="phone"]').value;
+    const car = this.querySelector('input[name="car"]').value;
+
+    const bookingData = {
+        name: name,
+        phone: phone,
+        car: car,
+        time: new Date().toLocaleString()
+    };
+
+    let bookings = JSON.parse(localStorage.getItem("bmwBookings")) || [];
+    bookings.push(bookingData);
+    localStorage.setItem("bmwBookings", JSON.stringify(bookings));
+
+    showPopup();
+});
 
 </script>
 
