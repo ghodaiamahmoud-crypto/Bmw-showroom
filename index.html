@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BMW Elite Showroom - Competition Edition</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+.filter-buttons {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.filter-btn {
+    background: #222;
+    color: #fff;
+    border: 1px solid #444;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: 0.3s;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background: #fff;
+    color: #000;
+    border-color: #fff;
+}
+
+.calculator-section {
+    background: #1a1a1a;
+    padding: 50px 20px;
+    text-align: center;
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+}
+
+.calc-box {
+    max-width: 500px;
+    margin: auto;
+    background: #222;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+.calc-box input,
+.calc-box select {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    background: #111;
+    border: 1px solid #333;
+    color: #fff;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.calc-result {
+    margin-top: 20px;
+    font-size: 20px;
+    color: #28a745;
+    font-weight: bold;
+}
+
+.admin-section {
+    background: #0d0d0d;
+    padding: 40px 20px;
+    border-top: 2px solid #444;
+}
+
+.admin-container {
+    max-width: 1000px;
+    margin: auto;
+    background: #161616;
+    padding: 25px;
+    border-radius: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th,
+td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #333;
+    color: #ccc;
+}
+
+th {
+    background: #222;
+    color: #fff;
+}
+
+.delete-btn {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    background: #c82333;
+}
+
+.admin-toggle-btn {
+    display: block;
+    margin: 20px auto;
+    background: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div id="loader">
+    <img src="bmw.png">
+    <div class="loading-bar"></div>
+</div>
+
+<header>
+    <h1>BMW Showroom</h1>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#cars">Cars</a>
+        <a href="#calc">Calculator</a>
+        <a href="#book">Book Test Drive</a>
+        <a href="#adminPanel">Admin Panel</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h2>Experience BMW Like Never Before</h2>
+    <p>Discover power, luxury, and innovation.</p>
+    <button onclick="document.getElementById('cars').scrollIntoView({behavior:'smooth'})">
+        View Cars
+    </button>
+</section>
+
+<section id="cars" class="cars-section" style="padding: 50px 20px; max-width: 1300px; margin: auto;">
+    <h2 style="text-align: center; margin-bottom: 20px; color: #fff;">Our Fleet</h2>
+
+    <div class="filter-buttons">
+        <button class="filter-btn active" onclick="filterCars('all')">All Cars</button>
+        <button class="filter-btn" onclick="filterCars('sport')">Sport (M-Series)</button>
+        <button class="filter-btn" onclick="filterCars('suv')">SUV (X-Series)</button>
+        <button class="filter-btn" onclick="filterCars('electric')">Electric & Hybrid</button>
+    </div>
+
+    <div class="cars" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
+
+        <div class="car" data-category="sport" onmouseenter="showDetails(this,'BMW M4')">
+            <img src="M4.jpg">
+            <h3>BMW M4</h3>
+            <p>Price: 8,000,000 EGP</p>
+            <div class="details"></div>
+        </div>
+
+        <div class="car" data-category="sport" onmouseenter="showDetails(this,'BMW M5')">
+            <img src="M5.jpg">
+            <h3>BMW M5</h3>
+            <p>Price: 10,500,000 EGP</p>
+            <div class="details"></div>
+        </div>
+
+        <div class="car" data-category="electric" onmouseenter="showDetails(this,'BMW i7')">
+            <img src=" I7.jpg">
+            <h3>BMW i7</h3>
+            <p>Price: 11,200,000 EGP</p>
+            <div class="details"></div>
+        </div>
+
+        <div class="car" data-category="suv" onmouseenter="showDetails(this,'BMW X6')">
+            <img src="X6.jpg">
+            <h3>BMW X6</h3>
+            <p>Price: 8,800,000 EGP</p>
+            <div class="details"></div>
+        </div>
+
+        <div class="car" data-category="sport" onmouseenter="showDetails(this,'BMW Z4')">
+            <img src="Z4.jpg">
+            <h3>BMW Z4</h3>
+            <p>Price: 3,900,000 EGP</p>
+            <div class="details"></div>
+        </div>
+
+        <div class="car" data-category="suv" onmouseenter="showDetails(this,'BMW X5')">
+            <img src="X5.jpg">
+            <h3>BMW X5</h3>
+            <p>Price: 8,500,000 EGP</p>
+            <div class="details"></div>
+        </div>
+
+        <div class="car" data-category="electric" onmouseenter="showDetails(this,'BMW i8')">
+            <img src="I8.jpg">
+            <h3>BMW i8</h3>
+            <p>Price: 7,900,000 EGP</p>
+            <div class="details"></div>
+        </div>
+
+        <div class="car" data-category="sport" onmouseenter="showDetails(this,'BMW M8')">
+            <img src="M8.jpg">
+            <h3>BMW M8</h3>
+            <p>Price: 15,900,000 EGP</p>
+            <div class="details"></div>
+        </div>
+
+    </div>
+</section>
+
+<section id="calc" class="calculator-section">
+    <h2>BMW Finance Calculator</h2>
+    <p style="color: #888; margin-bottom: 20px;">Calculate your estimated monthly installment</p>
+
+    <div class="calc-box">
+        <label style="text-align:right; display:block; color:#aaa;">Car Price (EGP):</label>
+        <input type="number" id="calcPrice" value="8000000" placeholder="Car Price">
+
+        <label style="text-align:right; display:block; color:#aaa;">Down Payment (EGP):</label>
+        <input type="number" id="calcDownPayment" value="2000000" placeholder="Down Payment">
+
+        <label style="text-align:right; display:block; color:#aaa;">Loan Period (Years):</label>
+        <select id="calcYears">
+            <option value="1">1 Year</option>
+            <option value="2">2 Years</option>
+            <option value="3" selected>3 Years</option>
+            <option value="5">5 Years</option>
+        </select>
+
+        <button onclick="calculateLoan()" style="background:#fff; color:#000; border:none; padding:12px; width:100%; font-weight:bold; border-radius:5px; cursor:pointer; margin-top:10px;">
+            Calculate
+        </button>
+
+        <div class="calc-result" id="calcResult">Estimated Monthly: 0 EGP</div>
+    </div>
+</section>
+
+<section id="book" class="booking">
+    <h2>Book Test Drive</h2>
+
+    <form id="bookingForm">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="text" name="phone" placeholder="Phone Number" required>
+        <input type="text" name="car" id="carInput" placeholder="Selected Car" required>
+        <button type="submit">Submit Request</button>
+    </form>
+</section>
+
+<section id="adminPanel" class="admin-section">
+    <div class="admin-container">
+        <h2 style="text-align: center; color: #fff; margin-bottom: 10px;">
+            🔒 Admin Panel - Bookings Management
+        </h2>
+
+        <p style="text-align: center; color: #777; font-size: 14px;">
+            Review all test drive requests saved locally
+        </p>
+
+        <button class="admin-toggle-btn" onclick="loadBookingsTable()">
+            Refresh Bookings List
+        </button>
+
+        <div style="overflow-x: auto;">
+            <table id="bookingsTable">
+                <thead>
+                    <tr>
+                        <th>Client Name</th>
+                        <th>Phone</th>
+                        <th>Car</th>
+                        <th>Date / Time</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="bookingsTableBody"></tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-content">
+        <img src="logo.jpg" alt="logo">
+        <h2>Directed By Alpha Team | Competition Edition</h2>
+    </div>
+</footer>
+
+<div id="popup" class="popup">
+    <div class="popup-box">
+        <h2>🚗 Car Booked Successfully!</h2>
+        <p>Your BMW test drive request has been saved.</p>
+        <button onclick="closePopup()">OK</button>
+    </div>
+</div>
+
+<script>
+function showDetails(element, car) {
+    let info = "";
+
+    switch (car) {
+        case "BMW M4":
+            info = "Engine: 3.0L Twin Turbo | 503 HP | 0-100: 3.8s";
+            break;
+        case "BMW M5":
+            info = "4.4L V8 Twin Turbo | 617 HP | 0-100: 3.2s";
+            break;
+        case "BMW i7":
+            info = "Electric Luxury Sedan | Range: 625 km | 536 HP";
+            break;
+        case "BMW X6":
+            info = "Sport SUV | 335 HP | 3.0L Turbo";
+            break;
+        case "BMW Z4":
+            info = "Roadster | 255 HP | 2.0L Turbo";
+            break;
+        case "BMW X5":
+            info = "Luxury SUV | 375 HP | 3.0L Turbo";
+            break;
+        case "BMW i8":
+            info = "Hybrid Supercar | 369 HP";
+            break;
+        case "BMW M8":
+            info = "V8 Twin Turbo | 617 HP | 0-100: 3.0s";
+            break;
+    }
+
+    document.querySelectorAll(".details").forEach(d => {
+        d.style.display = "none";
+        d.innerHTML = "";
+    });
+
+    let box = element.querySelector(".details");
+    box.innerHTML = info;
+    box.style.display = "block";
+
+    document.getElementById("carInput").value = car;
+}
+
+window.addEventListener("load", function() {
+    setTimeout(function() {
+        document.getElementById("loader").style.display = "none";
+    }, 1200);
+
+    loadBookingsTable();
+});
+
+function showPopup() {
+    document.getElementById("popup").style.display = "flex";
+}
+
+function closePopup() {
+    document.getElementById("popup").style.display = "none";
+    document.getElementById("bookingForm").reset();
+    loadBookingsTable();
+}
+
+document.getElementById("bookingForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const name = this.querySelector('input[name="name"]').value;
+    const phone = this.querySelector('input[name="phone"]').value;
+    const car = this.querySelector('input[name="car"]').value;
+
+    const bookingData = {
+        id: Date.now(),
+        name: name,
+        phone: phone,
+        car: car,
+        time: new Date().toLocaleString()
+    };
+
+    let bookings = JSON.parse(localStorage.getItem("bmwBookings")) || [];
+
+    bookings.push(bookingData);
+
+    localStorage.setItem("bmwBookings", JSON.stringify(bookings));
+
+    showPopup();
+});
+
+function filterCars(category) {
+    const buttons = document.querySelectorAll(".filter-btn");
+
+    buttons.forEach(btn => btn.classList.remove("active"));
+
+    event.target.classList.add("active");
+
+    const cars = document.querySelectorAll(".car");
+
+    cars.forEach(car => {
+        if (category === "all" || car.getAttribute("data-category") === category) {
+            car.style.display = "block";
+        } else {
+            car.style.display = "none";
+        }
+    });
+}
+
+function calculateLoan() {
+    let price = parseFloat(document.getElementById("calcPrice").value) || 0;
+    let downPayment = parseFloat(document.getElementById("calcDownPayment").value) || 0;
+    let years = parseInt(document.getElementById("calcYears").value) || 1;
+
+    let loanAmount = price - downPayment;
+
+    if (loanAmount < 0) {
+        loanAmount = 0;
+    }
+
+    let totalWithInterest = loanAmount * (1 + (0.10 * years));
+    let monthly = totalWithInterest / (years * 12);
+
+    document.getElementById("calcResult").innerText =
+        "Estimated Monthly: " +
+        Math.round(monthly).toLocaleString() +
+        " EGP";
+}
+
+function loadBookingsTable() {
+    let tbody = document.getElementById("bookingsTableBody");
+
+    tbody.innerHTML = "";
+
+    let bookings = JSON.parse(localStorage.getItem("bmwBookings")) || [];
+
+    if (bookings.length === 0) {
+        tbody.innerHTML =
+            `<tr><td colspan="5" style="text-align:center; color:#777;">No bookings found yet.</td></tr>`;
+        return;
+    }
+
+    bookings.forEach(b => {
+        let row = `<tr>
+            <td>${b.name}</td>
+            <td>${b.phone}</td>
+            <td>${b.car}</td>
+            <td>${b.time}</td>
+            <td>
+                <button class="delete-btn" onclick="deleteBooking(${b.id})">
+                    Delete
+                </button>
+            </td>
+        </tr>`;
+
+        tbody.innerHTML += row;
+    });
+}
+
+function deleteBooking(id) {
+    let bookings = JSON.parse(localStorage.getItem("bmwBookings")) || [];
+
+    bookings = bookings.filter(b => b.id !== id);
+
+    localStorage.setItem("bmwBookings", JSON.stringify(bookings));
+
+    loadBookingsTable();
+}
+</script>
+
+</body>
+</html>
