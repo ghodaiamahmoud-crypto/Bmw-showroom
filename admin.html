@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>BMW Showroom - Admin Bookings</title>
+<link rel="stylesheet" href="style.css">
+<style>
+body{min-height:100vh;padding:40px 20px}
+.admin-wrap{max-width:1100px;margin:auto}
+.admin-head{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:25px}
+.admin-head h1{margin:0}
+.admin-actions{display:flex;gap:10px;flex-wrap:wrap}
+.admin-btn{border:0;border-radius:8px;padding:11px 18px;background:#087fbc;color:#fff;cursor:pointer;font-weight:700}
+.admin-btn.danger{background:#9b1c1c}
+.admin-btn.back{background:#333}
+.booking-table{width:100%;border-collapse:collapse;overflow:hidden;border-radius:12px;background:rgba(255,255,255,.04)}
+.booking-table th,.booking-table td{padding:14px;border-bottom:1px solid rgba(255,255,255,.1);text-align:left}
+.booking-table th{color:#00aaff}
+.empty{text-align:center;padding:50px;color:#aaa}
+</style>
+</head>
+<body>
+<div class="admin-wrap">
+<div class="admin-head">
+<h1>BMW Booking Requests</h1>
+<div class="admin-actions">
+<button class="admin-btn back" onclick="location.href='index.html'">Back to Showroom</button>
+<button class="admin-btn danger" onclick="clearBookings()">Clear All</button>
+</div>
+</div>
+<div id="bookings"></div>
+</div>
+<script>
+function loadBookings(){
+ const bookings=JSON.parse(localStorage.getItem('bmwBookings')||'[]');
+ const box=document.getElementById('bookings');
+ if(!bookings.length){box.innerHTML='<div class="empty">No booking requests yet.</div>';return;}
+ box.innerHTML='<table class="booking-table"><thead><tr><th>#</th><th>Name</th><th>Phone</th><th>BMW</th><th>Date</th></tr></thead><tbody>'+
+ bookings.slice().reverse().map((b,i)=>'<tr><td>'+(i+1)+'</td><td>'+escapeHtml(b.name)+'</td><td>'+escapeHtml(b.phone)+'</td><td>'+escapeHtml(b.car)+'</td><td>'+escapeHtml(b.timestamp)+'</td></tr>').join('')+
+ '</tbody></table>';
+}
+function escapeHtml(v){return String(v).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));}
+function clearBookings(){if(confirm('Delete all booking requests?')){localStorage.removeItem('bmwBookings');loadBookings();}}
+loadBookings();
+</script>
+</body>
+</html>

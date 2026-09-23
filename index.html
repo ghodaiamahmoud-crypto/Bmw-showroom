@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BMW Elite Showroom</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="loader"><img src="bmw.png" alt="BMW"><div class="loading-bar"></div></div>
+<header>
+<h1>BMW Showroom</h1>
+<nav><a href="#cars">Cars</a><a href="#compare">Compare</a><a href="#calc">Calculator</a><a href="#book">Test Drive</a><a href="admin.html">Admin Panel</a><button id="themeToggle" type="button">☀️</button></nav>
+</header>
+<section class="hero"><span class="eyebrow">THE ULTIMATE DRIVING MACHINE</span><h2>Experience BMW Like Never Before</h2><p>Discover power, luxury, technology and innovation.</p><button onclick="document.getElementById('cars').scrollIntoView({behavior:'smooth'})">Explore Cars</button></section>
+<section id="cars" class="cars-section">
+<div class="section-title"><span>BMW COLLECTION</span><h2>Our Fleet</h2><p>Search, filter and explore your favorite BMW.</p></div>
+<div class="toolbar"><input id="searchInput" type="search" placeholder="Search BMW model..."><div class="filter-buttons"><button class="filter-btn active" data-filter="all">All Cars</button><button class="filter-btn" data-filter="sport">M Series</button><button class="filter-btn" data-filter="suv">X Series</button><button class="filter-btn" data-filter="electric">Electric & Hybrid</button><button class="filter-btn" data-filter="favorite">♥ Favorites</button></div></div>
+<div class="cars" id="carsGrid">
+<div class="car" data-category="sport" data-car="BMW M4" data-price="8000000" data-engine="3.0L Twin Turbo" data-hp="503 HP" data-zero="3.8s" data-speed="250 km/h" data-type="M Series" data-image="M4.jpg"><button class="favorite" type="button">♡</button><img src="M4.jpg" alt="BMW M4"><h3>BMW M4</h3><p>Price: 8,000,000 EGP</p><button class="details-btn" type="button">View Details</button></div>
+<div class="car" data-category="sport" data-car="BMW M5" data-price="10500000" data-engine="4.4L V8 Twin Turbo" data-hp="617 HP" data-zero="3.2s" data-speed="305 km/h" data-type="M Series" data-image="M5.jpg"><button class="favorite" type="button">♡</button><img src="M5.jpg" alt="BMW M5"><h3>BMW M5</h3><p>Price: 10,500,000 EGP</p><button class="details-btn" type="button">View Details</button></div>
+<div class="car" data-category="electric" data-car="BMW i7" data-price="11200000" data-engine="Electric" data-hp="536 HP" data-zero="4.7s" data-speed="240 km/h" data-type="Electric" data-image=" I7.jpg"><button class="favorite" type="button">♡</button><img src=" I7.jpg" alt="BMW i7"><h3>BMW i7</h3><p>Price: 11,200,000 EGP</p><button class="details-btn" type="button">View Details</button></div>
+<div class="car" data-category="suv" data-car="BMW X6" data-price="8800000" data-engine="3.0L Turbo" data-hp="335 HP" data-zero="5.5s" data-speed="250 km/h" data-type="X Series" data-image="X6.jpg"><button class="favorite" type="button">♡</button><img src="X6.jpg" alt="BMW X6"><h3>BMW X6</h3><p>Price: 8,800,000 EGP</p><button class="details-btn" type="button">View Details</button></div>
+<div class="car" data-category="sport" data-car="BMW Z4" data-price="3900000" data-engine="2.0L Turbo" data-hp="255 HP" data-zero="5.4s" data-speed="250 km/h" data-type="Roadster" data-image="Z4.jpg"><button class="favorite" type="button">♡</button><img src="Z4.jpg" alt="BMW Z4"><h3>BMW Z4</h3><p>Price: 3,900,000 EGP</p><button class="details-btn" type="button">View Details</button></div>
+<div class="car" data-category="suv" data-car="BMW X5" data-price="8500000" data-engine="3.0L Turbo" data-hp="375 HP" data-zero="5.5s" data-speed="243 km/h" data-type="X Series" data-image="X5.jpg"><button class="favorite" type="button">♡</button><img src="X5.jpg" alt="BMW X5"><h3>BMW X5</h3><p>Price: 8,500,000 EGP</p><button class="details-btn" type="button">View Details</button></div>
+<div class="car" data-category="electric" data-car="BMW i8" data-price="7900000" data-engine="Hybrid" data-hp="369 HP" data-zero="4.4s" data-speed="250 km/h" data-type="Hybrid Supercar" data-image="I8.jpg"><button class="favorite" type="button">♡</button><img src="I8.jpg" alt="BMW i8"><h3>BMW i8</h3><p>Price: 7,900,000 EGP</p><button class="details-btn" type="button">View Details</button></div>
+<div class="car" data-category="sport" data-car="BMW M8" data-price="15900000" data-engine="V8 Twin Turbo" data-hp="617 HP" data-zero="3.0s" data-speed="305 km/h" data-type="M Series" data-image="M8.jpg"><button class="favorite" type="button">♡</button><img src="M8.jpg" alt="BMW M8"><h3>BMW M8</h3><p>Price: 15,900,000 EGP</p><button class="details-btn" type="button">View Details</button></div>
+</div>
+</section>
+<section id="compare" class="compare-section"><div class="section-title"><span>SMART COMPARISON</span><h2>Compare BMW Models</h2><p>Select up to three cars.</p></div><div class="compare-selects"><select id="compare1"><option value="">Select first car</option></select><select id="compare2"><option value="">Select second car</option></select><select id="compare3"><option value="">Select third car</option></select></div><div id="compareTable" class="compare-table"></div></section>
+<section id="calc" class="calculator-section"><div class="section-title"><span>BMW FINANCE</span><h2>Finance Calculator</h2><p>Estimate your monthly installment.</p></div><div class="calc-box"><label>Car Price (EGP)</label><input type="number" id="calcPrice" value="8000000"><label>Down Payment (EGP)</label><input type="number" id="calcDownPayment" value="2000000"><label>Interest Rate (%)</label><input type="number" id="calcRate" value="10" step="0.1"><label>Loan Period</label><select id="calcYears"><option value="1">1 Year</option><option value="2">2 Years</option><option value="3" selected>3 Years</option><option value="5">5 Years</option><option value="7">7 Years</option></select><button onclick="calculateLoan()">Calculate Payment</button><div class="calc-result" id="calcResult">Estimated Monthly: 0 EGP</div><div class="calc-extra" id="calcExtra"></div></div></section>
+<section id="book" class="booking"><div class="section-title"><span>BOOK YOUR EXPERIENCE</span><h2>Book a Test Drive</h2><p>Choose your BMW and send your request.</p></div><form id="bookingForm" action="book.php" method="POST"><input type="text" name="name" placeholder="Your Name" required><input type="tel" name="phone" placeholder="Phone Number" required><input type="text" name="car" id="carInput" placeholder="Selected Car" readonly required><button type="submit">Submit Request</button></form></section>
+<footer><div class="footer-content"><img src="logo.jpg" alt="logo"><div><h3>BMW Elite Showroom</h3><p>Directed By Alpha Team | Competition Edition</p></div></div></footer>
+<div id="modal" class="modal"><div class="modal-box"><button class="close" onclick="closeModal()">×</button><img id="modalImage" src="" alt="BMW"><span id="modalType"></span><h2 id="modalTitle"></h2><div class="spec-grid"><div><b>Engine</b><span id="modalEngine"></span></div><div><b>Power</b><span id="modalHp"></span></div><div><b>0–100 km/h</b><span id="modalZero"></span></div><div><b>Top Speed</b><span id="modalSpeed"></span></div></div><h3 id="modalPrice"></h3><button class="modal-book" onclick="bookFromModal()">Book Test Drive</button></div></div>
+<div id="popup" class="popup"><div class="popup-box"><div class="success-icon">✓</div><span class="success-label">BOOKING CONFIRMED</span><h2>Booking Sent Successfully</h2><p>Your BMW test drive request has been received successfully.</p><div class="booking-summary" id="bookingSummary"></div><button onclick="closePopup()">Done</button></div></div>
+<script src="script.js"></script>
+</body>
+</html>
